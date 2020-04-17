@@ -1,4 +1,4 @@
-baseURL = "http://example.org/"
+baseURL = "https://renatdk.github.io/go/public/"
 languageCode = "ru-ru"
 title = "Решения на golang"
 theme = "hyde"
