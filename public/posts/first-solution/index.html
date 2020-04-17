@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru-ru" lang="ru-ru">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.69.0" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Первое решение &middot; Решения на golang</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://renatdk.github.io/go/public/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://renatdk.github.io/go/public/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://renatdk.github.io/go/public/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://renatdk.github.io/go/public/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://renatdk.github.io/go/public/"><h1>Решения на golang</h1></a>
+      <p class="lead">
+       Лучшие решения которые я нашел. Если найдете лучше, пожалуйста, напишите мне ;) 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://renatdk.github.io/go/public/">Решения</a> </li>
+        <li><a href="https://github.com/username/"> Github </a></li><li><a href="https://www.linkedin.com/in/username/"> LinkedIn </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; Пишет Ренат Дарыбаев</p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Первое решение</h1>
+  <time datetime=2020-04-15T06:52:37&#43;0600 class="post-date">Wed, Apr 15, 2020</time>
+  <p>Среди наших знакомых есть известный спамер. В конце каждого контеста он сабмитит свои неправильные решения со скоростью пулемёта. Кроме того, он ещё и ведёт нечестную игру, всегда используя по несколько отладочных аккаунтов. Жюри наконец-то решило дисквалифицировать спамера. Для этого они сначала хотят определить все его отладочные аккаунты. Известно, какие команды сабмитили свои решения в последние 10 минут контеста. Ваша задача — найти все отладочные аккаунты спамера. Жюри считает аккаунтами спамера всех, кто сабмитил решения больше одного раза в последние 10 минут.</p>
+<h3 id="исходные-данные">Исходные данные</h3>
+<p>В первой строке записано число N — количество сабмитов в последние 10 минут (0 ≤ N ≤ 100). Следующие N строк содержат названия команд, сабмитивших решения. Названия состоят только из строчных латинских букв и цифр. Длина названий не превосходит 30 символов.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;bufio&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#75715e">//&#34;math/big&#34;
+</span><span style="color:#75715e"></span>	<span style="color:#e6db74">&#34;os&#34;</span>
+	<span style="color:#e6db74">&#34;strings&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#e6db74">&#34;input.txt&#34;</span>)
+	<span style="color:#a6e22e">in</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">f</span>)
+	<span style="color:#75715e">//in := bufio.NewReader(os.Stdin)
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewWriter</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>)
+	<span style="color:#a6e22e">text</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">in</span>.<span style="color:#a6e22e">ReadString</span>(<span style="color:#ae81ff">0</span>)
+	<span style="color:#a6e22e">a</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Fields</span>(<span style="color:#a6e22e">text</span>)
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> []<span style="color:#66d9ef">string</span>
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">a</span> {
+		<span style="color:#a6e22e">found</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">false</span>
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">bs</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">b</span> {
+			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">bs</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">s</span> {
+				<span style="color:#a6e22e">found</span> = <span style="color:#66d9ef">true</span>
+				<span style="color:#66d9ef">break</span>
+			}
+		}
+		<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">found</span> {
+			<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">j</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">j</span> <span style="color:#f92672">&lt;=</span> len(<span style="color:#a6e22e">a</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">j</span><span style="color:#f92672">++</span> {
+				<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">s</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">a</span>[<span style="color:#a6e22e">j</span>] {
+					<span style="color:#a6e22e">b</span> = append(<span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">s</span>)
+					<span style="color:#66d9ef">break</span>
+				}
+			}
+		}
+	}
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">b</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">s</span>)
+	}
+	<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">Flush</span>()
+}
+
+</code></pre></div>
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>

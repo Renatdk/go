@@ -3,15 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://renatdk.github.io/go/public/posts/</loc>
+    <lastmod>2020-04-15T06:52:37+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://renatdk.github.io/go/public/posts/first-solution/</loc>
+    <lastmod>2020-04-15T06:52:37+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://renatdk.github.io/go/public/</loc>
+    <lastmod>2020-04-15T06:52:37+06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://renatdk.github.io/go/public/categories/</loc>
   </url>
   
   <url>
     <loc>https://renatdk.github.io/go/public/tags/</loc>
-  </url>
-  
-  <url>
-    <loc>https://renatdk.github.io/go/public/</loc>
   </url>
   
 </urlset>
